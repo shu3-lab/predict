@@ -45,7 +45,7 @@ def learn():
         path = create_model(feature, target)
         response["success"] = True
         response["path"] = path
-    # return the data dictionary as a JSON response
+    # return JSON response
     return flask.jsonify(response)
 
 if __name__ == "__main__":
