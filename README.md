@@ -1,4 +1,4 @@
-## This is REST API for machine learning written by python.(and using F framework)
+## This is REST API for machine learning written by python.(and using Flask framework)
 The library used for machine learning is  scikit-learn.
 
 ### How to use this api
