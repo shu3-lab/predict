@@ -51,8 +51,8 @@ def learn():
         target = np.array(target)
         #名前の取得
         name = ''
-        if flask.request.get('name'):
-            name = flask.request.get('name')
+        if flask.request.args.get('name'):
+            name = flask.request.args.get('name')
 
         path = create_model(feature, target, name)
         response["success"] = True
@@ -68,7 +68,7 @@ def eval():
     }
 
     if flask.request.method == "GET":
-        name = flask.request.get('name')
+        name = flask.request.args.get('name')
         model = load_model(name)
         input_data_list = []
         if flask.request.get_json().get('data'):
