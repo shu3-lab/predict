@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is REST API for machine learning written by python.(and using Flask framework)
+    [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).
+  version: "1.0.0"
+  title: Sample Predict
+  termsOfService: 'http://swagger.io/terms/'
+  license:
+    name: Unlicence
+    url: 'https://unlicense.org'
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/shu3-lab/SamplePredictionAPI/1.0.0
+  - url: http://localhost:5000/learning
+
+paths:
+  /model:
+    post:
+      parameters:
+        - in: query
+          name: name
+          required: true
+          description: Name of PKL file
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Model'
+      responses:
+        '200':
+          description: Succeed generating prediction model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Path'
+            
+  /evalution:
+    get:
+      parameters:
+        - in: query
+          name: name
+          required: true
+          description: Name of PKL file
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Succed evaluting accuray
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accuray'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        feature:
+          type: array
+          items: 
+            type: integer
+        target:
+          type: array
+          items: 
+            type: integer
+    Path:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of PKL file
+    Accuray:
+      type: object
+      properties:
+        accuray:
+          type: integer
+          format: int64
+          description: accuray of prediction
+    Data:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: integer
+        target:
+          type: array
+          items: 
+            type: integer
+  requestBodies:
+    Model:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Model'
+      description: Model of feature and target for prediction taining
+      required: true
+    Data:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Data'
+      description: Data for prediction
+      required: true
