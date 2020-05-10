@@ -6,4 +6,4 @@ The library used for machine learning is  scikit-learn.
 ## How to use this API
 
 The design of this API is written by OpenAPI 3.0(swagger).<br>
-Please read  `openapi: '3.0.2'.yml`.
+[Please access the swagger UI.](https://shu3-lab.github.io/predict/distribution/index.html)
