@@ -86,6 +86,12 @@ def eval():
         response["accuray"] = trained_accuray
     return flask.jsonify(response)
 
+@app.route("/")
+def index():
+    response = {
+        "message" : "Flask API is running!"
+    }
+    return flask.jsonify(response)
 
 if __name__ == "__main__":
     print(" * Flask starting server...")

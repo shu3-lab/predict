@@ -7,3 +7,7 @@ The library used for machine learning is  scikit-learn.
 
 The design of this API is written by OpenAPI 3.0(swagger).<br>
 [Please access the swagger UI.](https://shu3-lab.github.io/predict/distribution/index.html)
+
+### Run this API on docker container
+
+Run `docker-compose up -d --build`. 
