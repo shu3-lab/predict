@@ -103,6 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-./src/trained-model/*
+./app/src/trained-model/*
 .vscode
-./src/__pycache__/*
+./app/src/__pycache__/*

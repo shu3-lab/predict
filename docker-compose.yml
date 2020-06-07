@@ -2,12 +2,48 @@ version: '3'
 
 services:
   flask:
-    build: .
+    build: ./app
     ports:
       - "5000:5000"
     volumes:
-      - "./src:/projects"
+      - "./app/src:/projects"
     tty: true
     environment:
       TZ: Asia/Tokyo
     command: flask run --host 0.0.0.0 --port 5000
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "localhost:24220"
+        tag: "docker.{{.Name}}"
+    depends_on:
+      - fluentd
+  
+  fluentd:
+    build: ./fluentd
+    volumes:
+      - ./fluentd/config:/fluentd/etc
+    ports:
+      - "24220:24220"
+      - "24220:24220/udp"
+    depends_on: 
+      - elasticsearch
+      - kibana
+
+  elasticsearch:
+    build: ./elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  kibana:
+    build: ./kibana
+    ports:
+      - "5601:5601"
