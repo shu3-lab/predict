@@ -20,7 +20,7 @@ def create_model(x,y,name):
 
     # create linear model
     model = SVC(kernel='linear', random_state=None)
-    #モデルの学習を行う
+    #learn model
     model.fit(x_sc, y)
     #save mdoel as a PKL file
     joblib.dump(model, './trained-model/' + name + '.pkl')
