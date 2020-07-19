@@ -53,6 +53,12 @@ def learn():
         name = ''
         if flask.request.args.get('name'):
             name = flask.request.args.get('name')
+        else:
+            # validate name
+            response["success"] = False
+            response["path"] = "none"
+            response["message"] = "The value of name is required!"
+            return flask.jsonify(response)
 
         path = create_model(feature, target, name)
         response["success"] = True
@@ -68,7 +74,15 @@ def eval():
     }
 
     if flask.request.method == "GET":
-        name = flask.request.args.get('name')
+        if flask.request.args.get('name'):
+            name = flask.request.args.get('name')
+        else:
+            # validate name
+            response["success"] = False
+            response["path"] = "none"
+            response["message"] = "The value of name is required!"
+            return flask.jsonify(response)
+        
         model = load_model(name)
         input_data_list = []
         if flask.request.get_json().get('data'):
