@@ -27,7 +27,7 @@ def create_model(x,y,name):
     return os.path.abspath(name + ".pkl")
 
 def load_model(name):
-    #pklをロードする
+    #load a PKI file
     loaded_model = joblib.load('./trained-model/' + name + '.pkl')
     return loaded_model
 
@@ -40,16 +40,16 @@ def learn():
 
     if flask.request.method == "POST":
         feature = []
-        #特徴量の取得
+        #get feature values
         if flask.request.get_json().get("feature"):
             feature = flask.request.get_json().get("feature")
         feature = np.array(feature).reshape((len(feature),-1))
         target = []
-        #ターゲットの取得
+        #get target values
         if flask.request.get_json().get("target"):
             target = flask.request.get_json().get("target")
         target = np.array(target)
-        #名前の取得
+        #get name
         name = ''
         if flask.request.args.get('name'):
             name = flask.request.args.get('name')
@@ -88,11 +88,11 @@ def eval():
         if flask.request.get_json().get('data'):
             input_data_list = flask.request.get_json().get('data')
         input_data_list = np.array(input_data_list).reshape((len(input_data_list),-1))
-        #ターゲットの取得
+        #get target values
         if flask.request.get_json().get("target"):
             target = flask.request.get_json().get("target")
         target = np.array(target)
-        #データに対する精度取得
+        #get accuracy of prediction by input data
         predict = model.predict(input_data_list)
         trained_accuray = accuracy_score(target, predict)
     
@@ -102,6 +102,7 @@ def eval():
 
 @app.route("/")
 def index():
+    #return a index message.
     response = {
         "message" : "Prediction API is runnning!"
     }
