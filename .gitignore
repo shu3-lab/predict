@@ -106,3 +106,4 @@ venv.bak/
 ./app/src/trained-model/*
 .vscode
 ./app/src/__pycache__/*
+.DS_Store
