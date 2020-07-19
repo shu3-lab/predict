@@ -13,21 +13,21 @@ def create_model(x,y,name):
     print(x)
     print(y)
     
-    #データを標準化する
+    #fit data for standard
     sc = StandardScaler()
     sc.fit(x)
     x_sc = sc.transform(x)
 
-    # 線形SVMのインスタンスを生成
+    # create linear model
     model = SVC(kernel='linear', random_state=None)
     #モデルの学習を行う
     model.fit(x_sc, y)
-    #学習済みモデルの保存
+    #save mdoel as a PKL file
     joblib.dump(model, './trained-model/' + name + '.pkl')
     return os.path.abspath(name + ".pkl")
 
 def load_model(name):
-    #load a PKI file
+    #load a PKL file
     loaded_model = joblib.load('./trained-model/' + name + '.pkl')
     return loaded_model
 
