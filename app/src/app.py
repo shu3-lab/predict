@@ -103,7 +103,7 @@ def eval():
 @app.route("/")
 def index():
     response = {
-        "message" : "Flask API is running!"
+        "message" : "Prediction API is runnning!"
     }
     return flask.jsonify(response)
 
